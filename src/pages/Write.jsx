@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useInput from "../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../redux/modules/boardSlice";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Write() {
   const [title, onChangeTitleHandler] = useInput();
   const [contents, onChangeContentsHandler] = useInput();
 
   const postList = useSelector((state) => state.board);
-  console.log("postList!!!!", postList);
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const writerId = location.state.userId;
-  console.log("writerId👉👉👉", writerId);
+  console.log("postList🔅🔅", postList);
+
+  //글작성 버튼 눌렀을 때 state로 userId를 loginUser.id로 넘겨줬어
+  const writerId = location.state.userId; // ??여기 이해 안감=>ㅇㅋ이해감
 
   //글 작성
   const handlerWriteButtonClick = () => {
@@ -25,6 +27,7 @@ function Write() {
         writerId,
       })
     );
+    navigate("/");
   };
 
   return (

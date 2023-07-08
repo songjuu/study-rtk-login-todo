@@ -8,6 +8,7 @@ function Main() {
   const dispatch = useDispatch();
 
   const userList = useSelector((state) => state.user);
+  const boardList = useSelector((state) => state.board);
 
   console.log("userList", userList);
 
@@ -56,6 +57,26 @@ function Main() {
             </button>
           </div>
         )}
+      </div>
+      <div>
+        {boardList
+          .filter((board) => board.isDeleted === false)
+          .map((board) => {
+            return (
+              <div
+                style={{
+                  backgroundColor: "#bfd8ff",
+                  padding: "5px",
+                  margin: "5px",
+                  border: "1px solid black",
+                }}
+                key={board.id}
+              >
+                <h4>{board.title}</h4>
+                <h4>{board.contents}</h4>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
